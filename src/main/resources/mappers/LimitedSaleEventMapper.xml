@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orsonwu.limited_sale.db.mappers.LimitedSaleEventMapper">
+  <resultMap id="BaseResultMap" type="com.orsonwu.limited_sale.db.po.LimitedSaleEvent">
+    <id column="event_id" jdbcType="BIGINT" property="eventId" />
+    <result column="event_name" jdbcType="VARCHAR" property="eventName" />
+    <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
+    <result column="original_price" jdbcType="DECIMAL" property="originalPrice" />
+    <result column="sale_price" jdbcType="DECIMAL" property="salePrice" />
+    <result column="event_status" jdbcType="INTEGER" property="eventStatus" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="total_stock" jdbcType="BIGINT" property="totalStock" />
+    <result column="available_stock" jdbcType="BIGINT" property="availableStock" />
+    <result column="lock_stock" jdbcType="BIGINT" property="lockStock" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    event_id, event_name, commodity_id, original_price, sale_price, event_status, start_time, 
+    end_time, total_stock, available_stock, lock_stock
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from limited_sale_event
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from limited_sale_event
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.orsonwu.limited_sale.db.po.LimitedSaleEvent">
+    insert into limited_sale_event (event_id, event_name, commodity_id, 
+      original_price, sale_price, event_status, 
+      start_time, end_time, total_stock, 
+      available_stock, lock_stock)
+    values (#{eventId,jdbcType=BIGINT}, #{eventName,jdbcType=VARCHAR}, #{commodityId,jdbcType=BIGINT}, 
+      #{originalPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{eventStatus,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{totalStock,jdbcType=BIGINT}, 
+      #{availableStock,jdbcType=BIGINT}, #{lockStock,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.orsonwu.limited_sale.db.po.LimitedSaleEvent">
+    insert into limited_sale_event
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        event_id,
+      </if>
+      <if test="eventName != null">
+        event_name,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="eventStatus != null">
+        event_status,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="totalStock != null">
+        total_stock,
+      </if>
+      <if test="availableStock != null">
+        available_stock,
+      </if>
+      <if test="lockStock != null">
+        lock_stock,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        #{eventId,jdbcType=BIGINT},
+      </if>
+      <if test="eventName != null">
+        #{eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="eventStatus != null">
+        #{eventStatus,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalStock != null">
+        #{totalStock,jdbcType=BIGINT},
+      </if>
+      <if test="availableStock != null">
+        #{availableStock,jdbcType=BIGINT},
+      </if>
+      <if test="lockStock != null">
+        #{lockStock,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.orsonwu.limited_sale.db.po.LimitedSaleEvent">
+    update limited_sale_event
+    <set>
+      <if test="eventName != null">
+        event_name = #{eventName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null">
+        sale_price = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="eventStatus != null">
+        event_status = #{eventStatus,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalStock != null">
+        total_stock = #{totalStock,jdbcType=BIGINT},
+      </if>
+      <if test="availableStock != null">
+        available_stock = #{availableStock,jdbcType=BIGINT},
+      </if>
+      <if test="lockStock != null">
+        lock_stock = #{lockStock,jdbcType=BIGINT},
+      </if>
+    </set>
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.orsonwu.limited_sale.db.po.LimitedSaleEvent">
+    update limited_sale_event
+    set event_name = #{eventName,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=BIGINT},
+      original_price = #{originalPrice,jdbcType=DECIMAL},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      event_status = #{eventStatus,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      total_stock = #{totalStock,jdbcType=BIGINT},
+      available_stock = #{availableStock,jdbcType=BIGINT},
+      lock_stock = #{lockStock,jdbcType=BIGINT}
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+
+  <select id="queryLimitedSaleEventsByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from limited_sale_event
+    where event_status = #{id,jdbcType=SMALLINT}
+  </select>
+
+  <update id="lockStock" parameterType="java.lang.Long">
+    update limited_sale_event
+    set available_stock = available_stock - 1,
+        lock_stock = lock_stock + 1
+    where event_id = #{eventId,jdbcType=BIGINT}
+      and  available_stock > 0
+  </update>
+
+  <update id="deductStock" parameterType="java.lang.Long">
+    UPDATE limited_sale_event
+    SET lock_stock = lock_stock - 1
+    WHERE event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+
+  <update id="revertStock" parameterType="java.lang.Long">
+    update limited_sale_event
+    set available_stock = available_stock + 1,
+        lock_stock = lock_stock - 1
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+
+</mapper>
